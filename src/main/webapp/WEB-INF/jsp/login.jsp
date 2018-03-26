@@ -64,7 +64,7 @@
                 layer.msg("登录成功",{icon : 1,time : 1500},function () {
                     window.location.href = "/";
                 })
-            }else{debugger
+            }else{
                 layer.msg(data.msg,{icon : 2,time : 1500})
             }
         },"json")

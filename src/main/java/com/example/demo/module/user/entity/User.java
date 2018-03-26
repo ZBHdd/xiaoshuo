@@ -24,6 +24,8 @@ public class User {
 
     private String img;
 
+    private String collect;
+
     //0:男，1：女
     private Integer sex;
 
@@ -41,7 +43,13 @@ public class User {
         this.id = id;
     }
 
+    public String getCollect() {
+        return collect;
+    }
 
+    public void setCollect(String collect) {
+        this.collect = collect;
+    }
 
     public String getPassword() {
         return password;
