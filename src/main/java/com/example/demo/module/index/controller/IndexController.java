@@ -17,7 +17,7 @@ public class IndexController {
 
     /**
      * 首页
-     * @return
+     * @returndex
      */
     @RequestMapping("/")
     public String index(@SessionAttribute User user,@SessionAttribute Integer showType, ModelMap model){
@@ -44,4 +44,22 @@ public class IndexController {
     public String register(){
         return "register";
     }
+
+//    /**
+//     * 小说
+//     * @return
+//     */
+//    @RequestMapping("/register")
+//    public String register(){
+//        return "register";
+//    }
+//
+//    /**
+//     * 注册
+//     * @return
+//     */
+//    @RequestMapping("/register")
+//    public String register(){
+//        return "register";
+//    }
 }
