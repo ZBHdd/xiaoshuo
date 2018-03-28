@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.util;
 
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.web.multipart.MultipartFile;

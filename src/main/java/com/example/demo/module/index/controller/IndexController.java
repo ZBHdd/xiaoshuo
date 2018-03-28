@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/")
 public class IndexController {
 
+    public static final int INT = 999;
+
     /**
      * 首页
      * @returndex
@@ -45,21 +47,29 @@ public class IndexController {
         return "register";
     }
 
-//    /**
-//     * 小说
-//     * @return
-//     */
-//    @RequestMapping("/register")
-//    public String register(){
-//        return "register";
-//    }
-//
-//    /**
-//     * 注册
-//     * @return
-//     */
-//    @RequestMapping("/register")
-//    public String register(){
-//        return "register";
-//    }
+    /**
+     * 小说页面
+     * @return
+     */
+    @RequestMapping("/novelAdd")
+    public String novelAdd(@SessionAttribute User user, ModelMap model){
+        if(user.getIdentify() != INT){
+            model.addAttribute("error","没有使用权限");
+            return "/errors/error";
+        }
+        return "novelAdd";
+    }
+
+    /**
+     * 小说类型页面
+     * @return
+     */
+    @RequestMapping("/categoryAdd")
+    public String categoryAdd(@SessionAttribute User user, ModelMap model){
+        if(user.getIdentify() != INT){
+            model.addAttribute("error","没有使用权限");
+            return "/errors/error";
+        }
+        return "categoryAdd";
+    }
 }
