@@ -5,11 +5,11 @@
 <h1 style="text-align: center">U阅小说阅读网</h1>
 <h6 style="text-align: right">
     <c:choose>
-        <c:when test="${empty username}">
+        <c:when test="${empty user}">
             <span><a href="/login">登录</a>   <a href="/register">注册</a></span>
         </c:when>
         <c:otherwise>
-            <span>您好！   ${username}</span>
+            <span>您好！   ${user.username}</span>
         </c:otherwise>
     </c:choose>
 </h6>

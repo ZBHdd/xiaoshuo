@@ -10,29 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class QueryCondition <T>{
-    public Specification<T> addCondition(Map<String,Object> map) {
+public class QueryCondition<T> {
+    public Specification<T> addCondition(Map<String, Object> map) {
         return new Specification<T>() {
             @Override
             public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query,
                                          CriteriaBuilder builder) {
                 List<Predicate> list = new ArrayList<Predicate>();
-                for(Map.Entry<String,Object> entry : map.entrySet()){
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
                     if (entry.getKey().toUpperCase().contains(String.valueOf(Condition._LIKE))) {
                         String key = entry.getKey().split("-")[0];
-                        list.add(builder.like(root.get(key),String.valueOf(entry.getValue())));continue;
+                        list.add(builder.like(root.get(key), String.valueOf(entry.getValue())));
+                        continue;
                     }
                     if (entry.getKey().toUpperCase().contains(String.valueOf(Condition._EQ))) {
                         String key = entry.getKey().split("-")[0];
-                        list.add(builder.equal(root.get(key),String.valueOf(entry.getValue())));continue;
+                        list.add(builder.equal(root.get(key), String.valueOf(entry.getValue())));
+                        continue;
                     }
                     if (entry.getKey().toUpperCase().contains(String.valueOf(Condition._LT))) {
                         String key = entry.getKey().split("-")[0];
-                        list.add(builder.lessThanOrEqualTo(root.get(key),String.valueOf(entry.getValue())));continue;
+                        list.add(builder.lessThanOrEqualTo(root.get(key), String.valueOf(entry.getValue())));
+                        continue;
                     }
                     if (entry.getKey().toUpperCase().contains(String.valueOf(Condition._GT))) {
                         String key = entry.getKey().split("-")[0];
-                        list.add(builder.greaterThanOrEqualTo(root.get(key),String.valueOf(entry.getValue())));continue;
+                        list.add(builder.greaterThanOrEqualTo(root.get(key), String.valueOf(entry.getValue())));
+                        continue;
                     }
                     if (entry.getKey().toUpperCase().contains(String.valueOf(Condition._IN))) {
                         String key = entry.getKey().split("-")[0];

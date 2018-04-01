@@ -50,7 +50,11 @@
 </body>
 <script>
     $.get("/category/list",function (data) {
-
+        if(data.success){
+            for(i in data.obj){
+                $('#pid').append("<optioin value="+data.obj[i].id+">"+data.obj[i].name+"</optioin>")
+            }
+        }
     })
 </script>
 </html>
