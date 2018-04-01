@@ -1,6 +1,9 @@
 package com.example.demo.module.index.controller;
 
+import com.example.demo.module.novel.service.CategoryService;
 import com.example.demo.module.user.entity.User;
+import com.example.demo.util.ResultJson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 跳转页面
@@ -17,7 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
 
     public static final int INT = 999;
-
+    @Autowired
+    private CategoryService categoryService;
     /**
      * 首页
      *
@@ -31,6 +37,14 @@ public class IndexController {
         String showType = request.getParameter("showType");
         if (StringUtils.isEmpty(showType)) {
             showType = "0";
+            Map<String,Object> map = new HashMap<>();
+            ResultJson list = categoryService.list(map);
+            if(list.getSuccess()){
+                model.addAttribute("categorys",list.getObj());
+            }else {
+                model.addAttribute("error","类型列表查询失败");
+                return "error";
+            }
         }
         model.addAttribute("showType", showType);
         return "index";
@@ -62,7 +76,7 @@ public class IndexController {
      * @return
      */
     @RequestMapping("/novelAdd")
-    public String novelAdd(@SessionAttribute User user, ModelMap model) {
+    public String novelAdd(@SessionAttribute(required = false) User user, ModelMap model) {
         if (user.getIdentify() != INT) {
             model.addAttribute("error", "没有使用权限");
             return "/errors/error";
@@ -71,12 +85,26 @@ public class IndexController {
     }
 
     /**
+     * 管理员页面
+     *
+     * @return
+     */
+    @RequestMapping("/admin")
+    public String admin(@SessionAttribute(required = false) User user, ModelMap model) {
+        if (user.getIdentify() != INT) {
+            model.addAttribute("error", "没有使用权限");
+            return "/errors/error";
+        }
+        return "admin";
+    }
+
+    /**
      * 小说类型页面
      *
      * @return
      */
     @RequestMapping("/categoryAdd")
-    public String categoryAdd(@SessionAttribute User user, ModelMap model) {
+    public String categoryAdd(@SessionAttribute(required = false) User user, ModelMap model) {
         if (user.getIdentify() != INT) {
             model.addAttribute("error", "没有使用权限");
             return "/errors/error";

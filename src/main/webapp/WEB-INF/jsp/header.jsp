@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="rand"><%= java.lang.Math.round(java.lang.Math.random() * 7) %></c:set>
 <c:set var="colorArray" value="${fn:split('#aeabd8,#ded2c2,#dadfe3,#f1f1f1,#d2a689,#dcdcdc,#d7e7f3', ',')}"/>
-<c:set var="imgArray" value="${fn:split('A.jpg,L.jpg,dd.jpg,aa.jpg,bb.jpg,Y.jpg,D.jpg', ',')}"/>
+<c:set var="imgArray" value="${fn:split('A.jpg,L.jpg,icons/dd.jpg,S.jpg,icons/bb.jpg,Y.jpg,D.jpg', ',')}"/>
+<jsp:useBean id="random" class="java.util.Random" scope="application" />
 <h1 style="text-align: center">U阅小说阅读网</h1>
 <h6 style="text-align: right">
     <c:choose>

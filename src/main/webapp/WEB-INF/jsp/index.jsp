@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <%@include file="header.jsp" %>
-    <c:if test="${showType == 0}">
+    <c:if test="${showType == 0}&& categorys.length>0">
         <c:forEach var="category" items="categorys" varStatus="category">
             <div class="item" style="background-color: ${colorArray[rand mod 7]}">
                 <a href="/category?id=${category.id}"><!--category-->
