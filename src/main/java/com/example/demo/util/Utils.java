@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Utils {
@@ -64,5 +66,16 @@ public class Utils {
             return null;
         }
         return logoPathDir;
+    }
+
+    /**
+     * request 转 map
+     */
+    public static Map<String,Object> requestToMap(HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+        for(Map.Entry<String,String[]> entry : request.getParameterMap().entrySet()){
+            map.put(entry.getKey(),entry.getValue()[0]);
+        }
+        return map;
     }
 }

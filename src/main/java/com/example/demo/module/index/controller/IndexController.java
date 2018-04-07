@@ -1,5 +1,6 @@
 package com.example.demo.module.index.controller;
 
+import com.example.demo.module.novel.entity.Category;
 import com.example.demo.module.novel.service.CategoryService;
 import com.example.demo.module.user.entity.User;
 import com.example.demo.util.ResultJson;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,13 +40,8 @@ public class IndexController {
         if (StringUtils.isEmpty(showType)) {
             showType = "0";
             Map<String,Object> map = new HashMap<>();
-            ResultJson list = categoryService.list(map);
-            if(list.getSuccess()){
-                model.addAttribute("categorys",list.getObj());
-            }else {
-                model.addAttribute("error","类型列表查询失败");
-                return "error";
-            }
+            List<Category> list = categoryService.list(map);
+            model.addAttribute("categorys",list);
         }
         model.addAttribute("showType", showType);
         return "index";
@@ -71,7 +68,7 @@ public class IndexController {
     }
 
     /**
-     * 小说页面
+     * 小说添加页面
      *
      * @return
      */
@@ -99,7 +96,7 @@ public class IndexController {
     }
 
     /**
-     * 小说类型页面
+     * 小说类型添加页面
      *
      * @return
      */
